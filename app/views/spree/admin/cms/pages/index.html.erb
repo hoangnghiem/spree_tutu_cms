@@ -1,0 +1,44 @@
+<% content_for :page_title do %>Pages<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to 'New Page', new_admin_cms_page_path, class: "btn-success", icon: 'add', id: 'admin_new_cms_page_link' %>
+<% end if can? :create, Spree::TaxCategory %>
+
+<% if @pages.any? %>
+  <table class="table" id='listing_cms_pages' data-hook>
+    <thead>
+    <tr data-hook="cms_page_header">
+      <th>Title</th>
+      <th>URL Key</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @pages.each do |page|
+      @edit_url = edit_admin_cms_page_path(page)
+      @delete_url = admin_cms_page_path(page)
+    %>
+      <tr id="<%= spree_dom_id page %>" data-hook="tax_row">
+        <td><%= page.title%></td>
+        <td>/<%= page.url %></td>
+        <td>
+          <% if page.enabled? %>
+            <span class="label label-success">Enabled</span>
+          <% else %>
+            <span class="label label-danger">Disabled</span>
+          <% end %>
+        </td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(page, url: @edit_url, no_text: true) if can? :edit, page %>
+          <%= link_to_delete(page, url: @delete_url, no_text: true) if can? :delete, page %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Cms::Page)) %>,
+    <%= link_to(Spree.t(:add_one), new_admin_cms_page_path) if can? :create, Spree::Cms::Page %>!
+  </div>
+<% end %>

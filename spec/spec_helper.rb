@@ -33,6 +33,11 @@ require 'spree/testing_support/url_helpers'
 # Requires factories defined in lib/spree_tutu_cms/factories.rb
 require 'spree_tutu_cms/factories'
 
+require 'shoulda-matchers'
+
+FactoryGirl.definition_file_paths = [File.expand_path('../factories', __FILE__)]
+FactoryGirl.find_definitions
+
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 

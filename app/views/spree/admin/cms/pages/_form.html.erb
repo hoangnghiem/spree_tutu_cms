@@ -1,0 +1,61 @@
+<div data-hook="admin_cms_page_form_fields">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        Page Information
+      </h1>
+    </div>
+
+    <div class="panel-body">
+
+      <%= f.field_container :title, :class => ['form-group'] do %>
+        <%= f.label :title %>
+        <%= f.text_field :title, :class => 'form-control' %>
+      <% end %>
+
+      <%= f.field_container :url, :class => ['form-group'] do %>
+        <%= f.label :url, 'URL Key' %>
+        <%= f.text_field :url, :class => 'form-control' %>
+      <% end %>
+
+      <%= f.field_container :enabled, :class => ['checkbox'] do %>
+        <%= f.label :enabled do %>
+          <%= f.check_box :enabled %>
+          Enable
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        Meta Data
+      </h1>
+    </div>
+    <div class="panel-body">
+      <%= f.field_container :meta_keywords, :class => ['form-group'] do %>
+        <%= f.label :meta_keywords %>
+        <%= f.text_field :meta_keywords, :class => 'form-control' %>
+      <% end %>
+      <%= f.field_container :meta_description, :class => ['form-group'] do %>
+        <%= f.label :meta_description %>
+        <%= text_area :meta_description, :description, { :cols => 60, :rows => 6, :class => 'form-control' } %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1 class="panel-title">
+        Content
+      </h1>
+    </div>
+    <div class="panel-body">
+      <%= f.field_container :content, :class => ['form-group'] do %>
+        <%= f.label :content %>
+        <%= text_area :content, :description, { :cols => 60, :rows => 6, :class => 'form-control' } %>
+      <% end %>
+    </div>
+  </div>
+</div>
