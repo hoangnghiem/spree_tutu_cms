@@ -1,6 +1,8 @@
 module SpreeTutuCms
   class Engine < Rails::Engine
     require 'spree/core'
+    require 'summernote-rails'
+
     isolate_namespace Spree
     engine_name 'spree_tutu_cms'
 

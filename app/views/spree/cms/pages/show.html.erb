@@ -1,0 +1,14 @@
+<% content_for :head do -%>
+  <% self.title = @page.title %>
+  <meta name="title" content="<%= @page.title %>">
+  <%- if @page.meta_keywords.present? -%>
+    <meta name="keywords" content="<%= @page.meta_keywords %>">
+  <% end %>
+  <%- if @page.meta_description.present? -%>
+    <meta name="description" content="<%= @page.meta_description %>">
+  <% end -%>
+<% end -%>
+
+<div class="cms cms-<%= @page.url %>">
+  <%= @page.content.html_safe %>
+</div>

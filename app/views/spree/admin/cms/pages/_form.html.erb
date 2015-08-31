@@ -9,12 +9,12 @@
     <div class="panel-body">
 
       <%= f.field_container :title, :class => ['form-group'] do %>
-        <%= f.label :title %>
+        <%= f.label :title, 'Title *' %>
         <%= f.text_field :title, :class => 'form-control' %>
       <% end %>
 
       <%= f.field_container :url, :class => ['form-group'] do %>
-        <%= f.label :url, 'URL Key' %>
+        <%= f.label :url, 'URL Key *' %>
         <%= f.text_field :url, :class => 'form-control' %>
       <% end %>
 
@@ -40,7 +40,7 @@
       <% end %>
       <%= f.field_container :meta_description, :class => ['form-group'] do %>
         <%= f.label :meta_description %>
-        <%= text_area :meta_description, :description, { :cols => 60, :rows => 6, :class => 'form-control' } %>
+        <%= f.text_area :meta_description, { :cols => 60, :rows => 6, :class => 'form-control' } %>
       <% end %>
     </div>
   </div>
@@ -53,8 +53,8 @@
     </div>
     <div class="panel-body">
       <%= f.field_container :content, :class => ['form-group'] do %>
-        <%= f.label :content %>
-        <%= text_area :content, :description, { :cols => 60, :rows => 6, :class => 'form-control' } %>
+        <%#= f.label :content %>
+        <%= f.text_area :content, { :cols => 60, :rows => 6, :class => 'form-control', :data => {:provider => 'summernote'} } %>
       <% end %>
     </div>
   </div>
