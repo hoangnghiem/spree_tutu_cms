@@ -1,0 +1,22 @@
+<div data-hook="admin_cms_page_form_fields">
+  <%= f.field_container :title, :class => ['form-group'] do %>
+    <%= f.label :title, 'Title *' %>
+    <%= f.text_field :title, :class => 'form-control' %>
+  <% end %>
+
+  <%= f.field_container :enabled, :class => ['checkbox'] do %>
+    <%= f.label :enabled do %>
+      <%= f.check_box :enabled %>
+      Enable
+    <% end %>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :poster, 'Poster' %>
+
+    <%= f.file_field :poster %>
+    <% if @press.poster %>
+      <p style="margin-top: 10px;"><%= image_tag(@press.poster.url(:thumb), width: 50) %></p>
+    <% end %>
+  </div>
+</div>

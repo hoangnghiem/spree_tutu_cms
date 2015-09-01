@@ -1,0 +1,45 @@
+<% content_for :page_title do %>Press<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to 'New Press', new_admin_press_path, class: "btn-success", icon: 'add', id: 'admin_new_press_link' %>
+<% end if can? :create, Spree::TaxCategory %>
+
+<% if @presses.any? %>
+  <table class="table" id='listing_presses' data-hook>
+    <thead>
+    <tr data-hook="press_header">
+      <th>Poster</th>
+      <th>Title</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @presses.each do |press|
+      @edit_url = edit_admin_press_path(press)
+      @delete_url = admin_press_path(press)
+    %>
+      <tr id="<%= spree_dom_id press %>" data-hook="tax_row">
+        <td><%= image_tag press.poster.url(:thumb), width: 100 %></td>
+        <td><%= press.title %></td>
+        <td>
+          <% if press.enabled? %>
+            <span class="label label-success">Enabled</span>
+          <% else %>
+            <span class="label label-danger">Disabled</span>
+          <% end %>
+        </td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(press, url: @edit_url, no_text: true) if can? :edit, press %>
+          <%= link_to_delete(press, url: @delete_url, no_text: true) if can? :delete, press %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Press)) %>,
+    <%= link_to(Spree.t(:add_one), new_admin_press_path) if can? :create, Spree::Press %>!
+  </div>
+<% end %>

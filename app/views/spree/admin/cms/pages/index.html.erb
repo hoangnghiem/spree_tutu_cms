@@ -9,7 +9,7 @@
     <thead>
     <tr data-hook="cms_page_header">
       <th>Title</th>
-      <th>URL Key</th>
+      <th>URL</th>
       <th>Status</th>
       <th></th>
     </tr>
@@ -21,7 +21,7 @@
     %>
       <tr id="<%= spree_dom_id page %>" data-hook="tax_row">
         <td><%= page.title%></td>
-        <td>/<%= page.url %></td>
+        <td><%= page_url(page.url) %></td>
         <td>
           <% if page.enabled? %>
             <span class="label label-success">Enabled</span>
@@ -30,8 +30,12 @@
           <% end %>
         </td>
         <td class="actions actions-2 text-right">
+          <%= link_to page_url(page.url), class: 'btn btn-default btn-sm icon-link with-tip action-edit no-text', title: 'Preview', target: '_blank' do %>
+            <span class="icon icon-share"></span>
+          <% end %>
           <%= link_to_edit(page, url: @edit_url, no_text: true) if can? :edit, page %>
           <%= link_to_delete(page, url: @delete_url, no_text: true) if can? :delete, page %>
+        </td>
       </tr>
     <% end %>
     </tbody>

@@ -14,8 +14,11 @@
       <% end %>
 
       <%= f.field_container :url, :class => ['form-group'] do %>
-        <%= f.label :url, 'URL Key *' %>
-        <%= f.text_field :url, :class => 'form-control' %>
+        <%= f.label :url, 'URL *' %>
+        <div class="input-group">
+          <span class="input-group-addon"><%= request.base_url %>/</span>
+          <%= f.text_field :url, :class => 'form-control' %>
+        </div>
       <% end %>
 
       <%= f.field_container :enabled, :class => ['checkbox'] do %>

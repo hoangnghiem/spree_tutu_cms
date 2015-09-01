@@ -10,9 +10,13 @@ Spree::Core::Engine.routes.draw do
     namespace :cms do
       resources :pages, :except => [ :show ]
     end
+
+    resources :presses, :except => [ :show ]
   end
 
   constraints(Spree::PossiblePage) do
     get '*page_path', :to => 'cms/pages#show', :as => :page
   end
+
+  get 'press', to: 'presses#show', as: :press
 end
