@@ -1,3 +1,17 @@
+sendFile = (file, callback) ->
+  data = new FormData()
+  data.append("image[upload]", file)
+  $.ajax {
+    url: '/admin/cms/images',
+    data: data,
+    cache: false,
+    contentType: false,
+    processData: false,
+    type: 'POST',
+    success: (data) ->
+      callback(data)
+  }
+
 $ ->
   $('[data-provider="summernote"]').each ->
     $(this).summernote
@@ -14,3 +28,9 @@ $ ->
         ['view', ['fullscreen', 'codeview']],
         ['help', ['help']]
       ]
+      onImageUpload: (files) ->
+        $summernote = $(this)
+        for file in files
+          sendFile file, (imgUrl) ->
+            $imgNode = $('<img>').attr('src', imgUrl)
+            $summernote.summernote('insertNode', $imgNode[0])

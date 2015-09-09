@@ -9,6 +9,7 @@ Spree::Core::Engine.routes.draw do
   namespace :admin do
     namespace :cms do
       resources :pages, :except => [ :show ]
+      resources :images, :only => [ :create ]
     end
 
     resources :presses, :except => [ :show ]

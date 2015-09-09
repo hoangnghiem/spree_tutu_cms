@@ -15,7 +15,7 @@
     <%= f.label :poster, 'Poster' %>
 
     <%= f.file_field :poster %>
-    <% if @press.poster %>
+    <% if @press.poster.present? %>
       <p style="margin-top: 10px;"><%= image_tag(@press.poster.url(:thumb), width: 50) %></p>
     <% end %>
   </div>
