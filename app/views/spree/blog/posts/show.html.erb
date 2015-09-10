@@ -1,0 +1,8 @@
+<%= content_tag_for :div, @post do %>
+  <h1><%= @post.title %></h1>
+  <p><%= @post.short_content.html_safe %></p>
+  <% if @post.featured_image.present? %>
+    <%= image_tag @post.featured_image.url(:thumb) %>
+  <% end %>
+  <%= @post.content.html_safe %>
+<% end %>

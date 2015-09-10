@@ -1,0 +1,31 @@
+<div data-hook="admin_cms_page_form_fields">
+  <%= f.field_container :title, :class => ['form-group'] do %>
+    <%= f.label :title, 'Title *' %>
+    <%= f.text_field :title, :class => 'form-control' %>
+  <% end %>
+
+  <%= f.field_container :enabled, :class => ['checkbox'] do %>
+    <%= f.label :enabled do %>
+      <%= f.check_box :enabled %>
+      Enable
+    <% end %>
+  <% end %>
+
+  <%= f.field_container :featured_image, :class => ['form-group'] do %>
+    <%= f.label :featured_image %>
+    <%= f.file_field :featured_image, :class => 'form-control' %>
+  <% end %>
+  <% if f.object.featured_image.present? %>
+    <p><%= image_tag f.object.featured_image.url(:thumb), width: 100 %></p>
+  <% end %>
+
+  <%= f.field_container :short_content, :class => ['form-group'] do %>
+    <%= f.label :short_content, label: 'Short Content *' %>
+    <%= f.text_area :short_content, { :cols => 60, :rows => 6, :class => 'form-control' } %>
+  <% end %>
+
+  <%= f.field_container :content, :class => ['form-group'] do %>
+    <%= f.label :content, label: 'Content *' %>
+    <%= f.text_area :content, { :cols => 60, :rows => 6, :class => 'form-control', :data => {:provider => 'summernote'} } %>
+  <% end %>
+</div>

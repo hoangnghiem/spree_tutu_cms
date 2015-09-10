@@ -1,0 +1,48 @@
+<% content_for :page_title do %>Posts<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to 'New Post', new_admin_blog_post_path, class: "btn-success", icon: 'add', id: 'admin_new_blog_post_link' %>
+<% end if can? :create, Spree::TaxCategory %>
+
+<% if @posts.any? %>
+  <table class="table" id='listing_blog_posts' data-hook>
+    <thead>
+    <tr data-hook="blog_post_header">
+      <th>Title</th>
+      <th>URL</th>
+      <th>Status</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @posts.each do |post|
+      @edit_url = edit_admin_blog_post_path(post)
+      @delete_url = admin_blog_post_path(post)
+    %>
+      <tr id="<%= spree_dom_id post %>" data-hook="tax_row">
+        <td><%= post.title %></td>
+        <td><%= blog_post_url(post) %></td>
+        <td>
+          <% if post.enabled? %>
+            <span class="label label-success">Enabled</span>
+          <% else %>
+            <span class="label label-danger">Disabled</span>
+          <% end %>
+        </td>
+        <td class="actions actions-2 text-right">
+          <%= link_to blog_post_url(post), class: 'btn btn-default btn-sm icon-link with-tip action-edit no-text', title: 'Preview', target: '_blank' do %>
+            <span class="icon icon-share"></span>
+          <% end %>
+          <%= link_to_edit(post, url: @edit_url, no_text: true) if can? :edit, post %>
+          <%= link_to_delete(post, url: @delete_url, no_text: true) if can? :delete, post %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Blog::Post)) %>,
+    <%= link_to(Spree.t(:add_one), new_admin_blog_post_path) if can? :create, Spree::Blog::Post %>!
+  </div>
+<% end %>

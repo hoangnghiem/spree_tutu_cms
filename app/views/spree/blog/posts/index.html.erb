@@ -1,0 +1,12 @@
+<div class="posts">
+  <% @posts.each do |post| %>
+    <%= content_tag_for :div, post do %>
+      <h3><%= link_to post.title, blog_post_path(post) %></h3>
+      <p><%= post.short_content.html_safe %></p>
+      <% if post.featured_image.present? %>
+        <%= image_tag post.featured_image.url(:thumb) %>
+      <% end %>
+    <% end %>
+    <hr/>
+  <% end %>
+</div>
