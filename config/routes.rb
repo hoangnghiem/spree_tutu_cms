@@ -12,6 +12,10 @@ Spree::Core::Engine.routes.draw do
       resources :images, :only => [ :create ]
     end
 
+    namespace :blog do
+      resources :posts, :except => [ :show ]
+    end
+
     resources :presses, :except => [ :show ]
   end
 
@@ -19,5 +23,7 @@ Spree::Core::Engine.routes.draw do
     get '*page_path', :to => 'cms/pages#show', :as => :page
   end
 
+  get 'blog/:post_id', to: 'blog/posts#show', as: :blog_post
+  get 'blog', to: 'blog/posts#index', as: :blog
   get 'press', to: 'presses#show', as: :press
 end
