@@ -1,0 +1,19 @@
+<div data-hook="admin_blog_post_medium_form_fields">
+  <%= f.field_container :name, :class => ['form-group'] do %>
+    <%= f.label :name, 'Name *' %>
+    <%= f.text_field :name, :class => 'form-control' %>
+  <% end %>
+
+  <%= f.field_container :url, :class => ['form-group'] do %>
+    <%= f.label :url, 'URL' %>
+    <%= f.text_field :url, :class => 'form-control', placeholder: 'Enter full url address' %>
+  <% end %>
+
+  <%= f.field_container :file, :class => ['form-group'] do %>
+    <%= f.label :file, 'Media File' %>
+    <%= f.file_field :file, :class => 'form-control' %>
+  <% end %>
+  <% if f.object.file.present? %>
+    <p><%= image_tag f.object.file.url(:thumb), width: 100 %></p>
+  <% end %>
+</div>

@@ -13,7 +13,12 @@ Spree::Core::Engine.routes.draw do
     end
 
     namespace :blog do
-      resources :posts, :except => [ :show ]
+      resources :posts, :except => [ :show ] do
+        resource :side_content, only: [:show, :update]
+        resources :media, :except => [ :show ] do
+          post :update_positions, on: :collection
+        end
+      end
     end
 
     resources :presses, :except => [ :show ]

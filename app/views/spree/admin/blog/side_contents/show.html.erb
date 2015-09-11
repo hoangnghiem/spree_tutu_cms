@@ -1,0 +1,37 @@
+<% content_for :page_title do %>
+  Edit Post
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to_with_icon 'arrow-left', 'Back To Posts List', admin_blog_posts_path, class: 'btn btn-default' %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/post_tabs', locals: {current: :side_content} %>
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @post} %>
+
+<%= form_for [:admin, :blog, @post], url: admin_blog_post_side_content_path(@post) do |f| %>
+  <fieldset>
+
+    <div data-hook="admin_blog_side_content_form_fields">
+      <%= f.field_container :side_content_title, :class => ['form-group'] do %>
+        <%= f.label :side_content_title, 'Title' %>
+        <%= f.text_field :side_content_title, :class => 'form-control' %>
+      <% end %>
+
+      <%= f.field_container :side_content_link, :class => ['form-group'] do %>
+        <%= f.label :side_content_link, 'URL' %>
+        <%= f.text_field :side_content_link, :class => 'form-control', placeholder: 'Enter full url address' %>
+      <% end %>
+
+      <%= f.field_container :side_content_image, :class => ['form-group'] do %>
+        <%= f.label :side_content_image, 'Image' %>
+        <%= f.file_field :side_content_image, :class => 'form-control' %>
+      <% end %>
+      <% if f.object.side_content_image.present? %>
+        <p><%= image_tag f.object.side_content_image.url(:thumb), width: 100 %></p>
+      <% end %>
+    </div>
+
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

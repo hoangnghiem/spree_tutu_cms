@@ -32,7 +32,10 @@ class Spree::Admin::Cms::PagesController < Spree::Admin::BaseController
   def destroy
     @page.destroy
 
-    redirect_to admin_cms_pages_path
+    respond_with(@page) do |format|
+      format.html { redirect_to admin_cms_pages_path, notice: 'Page destroyed successfully.' }
+      format.js   { render :partial => "spree/admin/shared/destroy" }
+    end
   end
 
   private

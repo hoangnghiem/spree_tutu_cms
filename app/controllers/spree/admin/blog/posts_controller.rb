@@ -16,7 +16,7 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
     @post = Spree::Blog::Post.new post_params
 
     if @post.save
-      redirect_to admin_blog_posts_path
+      redirect_to admin_blog_posts_path, notice: 'Post created successfully.'
     else
       render :new
     end
@@ -25,13 +25,16 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
   def update
     @post.update_attributes post_params
 
-    redirect_to admin_blog_posts_path
+    redirect_to admin_blog_posts_path, notice: 'Post updated successfully.'
   end
 
   def destroy
     @post.destroy
 
-    redirect_to admin_blog_posts_path
+    respond_with(@post) do |format|
+      format.html { redirect_to admin_blog_posts_path, notice: 'Post destroyed successfully.' }
+      format.js   { render :partial => "spree/admin/shared/destroy" }
+    end
   end
 
   private

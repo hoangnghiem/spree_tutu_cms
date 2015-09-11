@@ -15,7 +15,7 @@ sendFile = (file, callback) ->
 $ ->
   $('[data-provider="summernote"]').each ->
     $(this).summernote
-      height: 150
+      height: 350
       toolbar: [
         ['style', ['style']],
         ['font', ['bold', 'italic', 'underline', 'clear']],

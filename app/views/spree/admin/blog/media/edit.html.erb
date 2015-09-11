@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  Edit Post
+<% end %>
+
+<%= render partial: 'spree/admin/shared/post_tabs', locals: {current: :media} %>
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @medium} %>
+
+<%= form_for [:admin, :blog, @post, @medium] do |f| %>
+  <fieldset>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>
