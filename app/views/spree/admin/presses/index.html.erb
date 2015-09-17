@@ -5,10 +5,10 @@
 <% end if can? :create, Spree::TaxCategory %>
 
 <% if @presses.any? %>
-  <table class="table" id='listing_presses' data-hook>
+<table class="table sortable" data-hook="press_table" data-sortable-link="<%= update_positions_admin_presses_url %>">
     <thead>
     <tr data-hook="press_header">
-      <th>Poster</th>
+      <th colspan="2">Poster</th>
       <th>Title</th>
       <th>Status</th>
       <th></th>
@@ -19,7 +19,12 @@
       @edit_url = edit_admin_press_path(press)
       @delete_url = admin_press_path(press)
     %>
-      <tr id="<%= spree_dom_id press %>" data-hook="tax_row">
+      <tr id="<%= spree_dom_id press %>" data-hook="press_row">
+        <td class="move-handle text-center">
+          <% if can? :edit, press %>
+            <span class="icon icon-move handle"></span>
+          <% end %>
+        </td>
         <td><%= image_tag press.poster.url(:thumb), width: 100 %></td>
         <td><%= press.title %></td>
         <td>

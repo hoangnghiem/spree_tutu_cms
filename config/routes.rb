@@ -21,7 +21,9 @@ Spree::Core::Engine.routes.draw do
       end
     end
 
-    resources :presses, :except => [ :show ]
+    resources :presses, :except => [ :show ] do
+      post :update_positions, on: :collection
+    end
   end
 
   constraints(Spree::PossiblePage) do

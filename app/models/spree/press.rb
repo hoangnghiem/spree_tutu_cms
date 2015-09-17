@@ -1,5 +1,7 @@
 class Spree::Press < ActiveRecord::Base
 
+  acts_as_list
+
   validates :title, presence: true
 
   has_attached_file :poster,
@@ -12,4 +14,8 @@ class Spree::Press < ActiveRecord::Base
   validates_attachment :poster,
                        :presence => true,
                        :content_type => { :content_type => %w(image/jpeg image/jpg image/png image/gif) }
+
+  scope :enabled, -> { where(:enabled => true) }
+  scope :disabled, -> { where(:enabled => false)}
+
 end

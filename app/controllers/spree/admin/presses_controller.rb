@@ -35,6 +35,18 @@ class Spree::Admin::PressesController < Spree::Admin::BaseController
     redirect_to admin_presses_path
   end
 
+  def update_positions
+    ActiveRecord::Base.transaction do
+      params[:positions].each do |id, index|
+        Spree::Press.find(id).set_list_position(index)
+      end
+    end
+
+    respond_to do |format|
+      format.js { render text: 'Ok' }
+    end
+  end
+
   private
 
   def collection_url
@@ -43,7 +55,7 @@ class Spree::Admin::PressesController < Spree::Admin::BaseController
 
   def load_presses
     per_page = params[:per_page] || 20
-    @presses = Spree::Press.order('created_at DESC').page(params[:page]).per(per_page)
+    @presses = Spree::Press.order('position ASC').page(params[:page]).per(per_page)
   end
 
   def find_press

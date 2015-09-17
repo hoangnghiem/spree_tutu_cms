@@ -1,0 +1,8 @@
+<div class="presses">
+  <% @presses.each do |press| %>
+    <div class="press">
+      <div class="poster"><%= image_tag press.poster.url(:thumb) %></div>
+      <div class="title"><%= press.title %></div>
+    </div>
+  <% end %>
+</div>
