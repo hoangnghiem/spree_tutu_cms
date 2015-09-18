@@ -17,7 +17,7 @@ class Spree::Admin::Cms::PagesController < Spree::Admin::BaseController
     @page = Spree::Cms::Page.new page_params
 
     if @page.save
-      redirect_to admin_cms_pages_path
+      redirect_to edit_admin_cms_page_path(@page), notice: 'Page created successfully.'
     else
       render :new
     end
@@ -26,7 +26,7 @@ class Spree::Admin::Cms::PagesController < Spree::Admin::BaseController
   def update
     @page.update_attributes page_params
 
-    redirect_to admin_cms_pages_path
+    redirect_to admin_cms_pages_path, notice: 'Page updated successfully.'
   end
 
   def destroy
@@ -60,7 +60,8 @@ class Spree::Admin::Cms::PagesController < Spree::Admin::BaseController
         :enabled,
         :content,
         :meta_keywords,
-        :meta_description
+        :meta_description,
+        :layout_id
     )
   end
 

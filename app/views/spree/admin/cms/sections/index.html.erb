@@ -1,0 +1,41 @@
+<% content_for :page_title do %>
+  Edit Layout
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to 'New Section', new_admin_cms_layout_section_path(@layout), class: "btn-success", icon: 'add', id: 'admin_new_blog_post_media_link' %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/layout_tabs', locals: {current: :sections} %>
+
+<% if @sections.any? %>
+  <table class="table sortable" data-hook="sections_table">
+    <thead>
+      <tr data-hook="cms_layout_section_header">
+        <th>Name</th>
+        <th>Key</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @sections.each do |section|
+      @edit_url = edit_admin_cms_layout_section_path(@layout, section)
+      @delete_url = admin_cms_layout_section_path(@layout, section)
+    %>
+      <tr id="<%= spree_dom_id section %>" data-hook="section-row">
+        <td><%= link_to section.name, @edit_url %></td>
+        <td><%= section.key %></td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(section, url: @edit_url, no_text: true) if can? :edit, section %>
+          <%= link_to_delete(section, url: @delete_url, no_text: true) if can? :delete, section %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Cms::Section)) %>,
+    <%= link_to(Spree.t(:add_one), new_admin_cms_layout_section_path(@layout)) if can? :create, Spree::Cms::Section %>!
+  </div>
+<% end %>

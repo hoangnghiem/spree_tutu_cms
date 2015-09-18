@@ -1,0 +1,10 @@
+<% content_for :sidebar do %>
+  <ul class="nav nav-pills nav-stacked" data-hook="admin_post_tabs">
+    <%= content_tag :li, class: ('active' if current == :details) do %>
+      <%= link_to_with_icon 'edit', Spree.t(:details), edit_admin_cms_page_path(@page) %>
+    <% end if can?(:admin, Spree::Product) %>
+    <%= content_tag :li, class: ('active' if current == :contents) do %>
+      <%= link_to_with_icon 'file', 'Contents', admin_cms_page_page_contents_path(@page) %>
+    <% end if can?(:admin, Spree::Image) %>
+  </ul>
+<% end %>

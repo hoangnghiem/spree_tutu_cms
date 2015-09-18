@@ -1,0 +1,6 @@
+<div data-hook="admin_cms_page_page_content_form_fields">
+  <%= f.hidden_field :section_id %>
+  <%= f.field_container :content, :class => ['form-group'] do %>
+    <%= f.text_area :content, { :cols => 60, :rows => 6, :class => 'form-control', :data => {:provider => 'summernote'} } %>
+  <% end %>
+</div>

@@ -1,0 +1,39 @@
+<% content_for :page_title do %>
+  Edit Layout
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to_with_icon 'arrow-left', 'Back To Layout List', admin_cms_layouts_path, class: 'btn btn-default' %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/layout_tabs', locals: {current: :design} %>
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @layout } %>
+
+<%= form_for @layout, url: admin_cms_layout_design_path(@layout) do |f| %>
+  <fieldset>
+    <div data-hook="admin_cms_layout_design_form_fields">
+      <div class="row">
+        <div class="col-md-8">
+          <%= f.field_container :template, :class => ['form-group'] do %>
+            <%= f.label :template, 'Template *' %>
+            <%= f.text_area :template, :class => 'form-control', :rows => 20 %>
+          <% end %>
+        </div>
+        <div class="col-md-4">
+          <h4>Section Variables</h4>
+          <% if @layout.sections.any? %>
+            <ul>
+              <% @layout.sections.each do |section| %>
+                <li>{{<%= section.key %>}}</li>
+              <% end %>
+            </ul>
+          <% else %>
+            <div class="alert alert-error">Sections are not configured. <%= link_to 'Add One', new_admin_cms_layout_section_path(@layout) %> and get back to design.</div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

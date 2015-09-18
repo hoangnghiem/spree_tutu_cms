@@ -8,8 +8,14 @@ end
 Spree::Core::Engine.routes.draw do
   namespace :admin do
     namespace :cms do
-      resources :pages, :except => [ :show ]
+      resources :pages, :except => [ :show ] do
+        resources :page_contents, :except => [:show]
+      end
       resources :images, :only => [ :create ]
+      resources :layouts, :except => [ :show ] do
+        resources :sections, :except => [:show]
+        resource :design, :only => [:show, :update]
+      end
     end
 
     namespace :blog do

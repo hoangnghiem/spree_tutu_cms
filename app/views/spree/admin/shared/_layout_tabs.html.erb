@@ -1,0 +1,13 @@
+<% content_for :sidebar do %>
+  <ul class="nav nav-pills nav-stacked" data-hook="admin_layout_tabs">
+    <%= content_tag :li, class: ('active' if current == :details) do %>
+      <%= link_to_with_icon 'edit', Spree.t(:details), edit_admin_cms_layout_path(@layout) %>
+    <% end if can?(:admin, Spree::Product) %>
+    <%= content_tag :li, class: ('active' if current == :sections) do %>
+      <%= link_to_with_icon 'th-large', 'Sections', admin_cms_layout_sections_path(@layout) %>
+    <% end if can?(:admin, Spree::Image) %>
+    <%= content_tag :li, class: ('active' if current == :design) do %>
+      <%= link_to_with_icon 'cog', 'Design', admin_cms_layout_design_path(@layout) %>
+    <% end if can?(:admin, Spree::Variant) %>
+  </ul>
+<% end %>

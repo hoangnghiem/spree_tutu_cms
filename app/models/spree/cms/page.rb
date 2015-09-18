@@ -1,7 +1,22 @@
+require 'liquid'
+
 class Spree::Cms::Page < ActiveRecord::Base
-  validates :title, presence: true
+
+  belongs_to :layout, class_name: 'Spree::Cms::Layout', foreign_key: :layout_id
+  has_many :page_contents, class_name: 'Spree::Cms::PageContent', dependent: :destroy
+
+  validates :title, :layout_id, presence: true
   validates :url, presence: true, uniqueness: true, format: { with: /\A[\w\-\/]*\z/, message: "invalid url format" }
 
   scope :enabled, -> { where(:enabled => true) }
   scope :disabled, -> { where(:enabled => false)}
+
+  def render
+    args = {}
+    page_contents.each do |page_content|
+      args[page_content.section.key] = page_content.content
+    end
+    ::Liquid::Template.parse(layout.template).render(args)
+  end
+
 end

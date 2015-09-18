@@ -7,6 +7,10 @@
     </div>
 
     <div class="panel-body">
+      <%= f.field_container :layout_id, :class => ['form-group'] do %>
+        <%= f.label :layout_id, 'Layout' %> <span class="required">*</span>
+        <%= f.collection_select(:layout_id, Spree::Cms::Layout.all, :id, :name, {}, { :class => 'select2' }) %>
+      <% end %>
 
       <%= f.field_container :title, :class => ['form-group'] do %>
         <%= f.label :title, 'Title *' %>
@@ -44,20 +48,6 @@
       <%= f.field_container :meta_description, :class => ['form-group'] do %>
         <%= f.label :meta_description %>
         <%= f.text_area :meta_description, { :cols => 60, :rows => 6, :class => 'form-control' } %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h1 class="panel-title">
-        Content
-      </h1>
-    </div>
-    <div class="panel-body">
-      <%= f.field_container :content, :class => ['form-group'] do %>
-        <%#= f.label :content %>
-        <%= f.text_area :content, { :cols => 60, :rows => 6, :class => 'form-control', :data => {:provider => 'summernote'} } %>
       <% end %>
     </div>
   </div>

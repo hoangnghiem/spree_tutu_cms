@@ -6,6 +6,7 @@
   <%= link_to_with_icon 'arrow-left', 'Back To Page List', admin_cms_pages_path, class: 'btn btn-default' %>
 <% end %>
 
+<%= render partial: 'spree/admin/shared/page_tabs', locals: {current: :details} %>
 <%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @page} %>
 
 <%= form_for [:admin, :cms, @page] do |f| %>

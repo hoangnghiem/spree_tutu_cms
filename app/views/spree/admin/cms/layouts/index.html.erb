@@ -1,0 +1,35 @@
+<% content_for :page_title do %>Layouts<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to 'New Layout', new_admin_cms_layout_path, class: "btn-success", icon: 'add', id: 'admin_new_cms_layout_link' %>
+<% end if can? :create, Spree::TaxCategory %>
+
+<% if @layouts.any? %>
+  <table class="table" id='listing_cms_layouts' data-hook>
+    <thead>
+    <tr data-hook="cms_layout_header">
+      <th>Name</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @layouts.each do |layout|
+      @edit_url = edit_admin_cms_layout_path(layout)
+      @delete_url = admin_cms_layout_path(layout)
+    %>
+      <tr id="<%= spree_dom_id layout %>" data-hook="layout_row">
+        <td><%= link_to layout.name, edit_admin_cms_layout_path(layout) %></td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(layout, url: @edit_url, no_text: true) if can? :edit, layout %>
+          <%= link_to_delete(layout, url: @delete_url, no_text: true) if can? :delete, layout %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Cms::Layout)) %>,
+    <%= link_to(Spree.t(:add_one), new_admin_cms_layout_path) if can? :create, Spree::Cms::Layout %>!
+  </div>
+<% end %>

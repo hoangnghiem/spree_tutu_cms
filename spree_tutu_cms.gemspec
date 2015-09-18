@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'summernote-rails'
   s.add_dependency 'font-awesome-rails'
   s.add_dependency 'bootstrap-sass'
+  s.add_dependency 'liquid'
 
   s.add_development_dependency 'capybara', '~> 2.4'
   s.add_development_dependency 'coffee-rails'

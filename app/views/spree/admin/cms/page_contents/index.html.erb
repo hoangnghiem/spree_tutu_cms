@@ -1,0 +1,26 @@
+<% content_for :page_title do %>
+  Edit Page
+<% end %>
+
+<%= render partial: 'spree/admin/shared/page_tabs', locals: {current: :contents} %>
+
+<table class="table sortable" data-hook="page_contents_table">
+  <thead>
+    <tr>
+      <th>Section</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @page.page_contents.each do |page_content| %>
+      <tr>
+        <td>
+          <% if page_content.new_record? %>
+            <%= link_to page_content.section.name, new_admin_cms_page_page_content_path(@page, section_id: page_content.section_id) %>
+          <% else %>
+            <%= link_to page_content.section.name, edit_admin_cms_page_page_content_path(@page, page_content) %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
