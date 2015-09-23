@@ -74,7 +74,8 @@ class Spree::Admin::Blog::MediaController < Spree::Admin::BaseController
         :name,
         :url,
         :file,
-        :file_remote_url
+        :file_remote_url,
+        :group_id
     )
   end
 
