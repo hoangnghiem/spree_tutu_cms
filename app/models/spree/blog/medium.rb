@@ -19,6 +19,8 @@ class Spree::Blog::Medium < ActiveRecord::Base
   validates_attachment :file,
                        :content_type => { :content_type => %w(image/jpeg image/jpg image/png image/gif) }
 
+  scope :root, -> { where(:group_id => [nil, '']) }
+
   def file_remote_url=(url_value)
     if url_value.present?
       self.file = URI.parse(url_value)
