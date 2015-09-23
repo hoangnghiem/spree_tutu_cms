@@ -1,4 +1,7 @@
 class Spree::Blog::Medium < ActiveRecord::Base
+  has_many :sub_media, class_name: "Spree::Blog::Medium", foreign_key: "group_id"
+  belongs_to :group, class_name: "Spree::Blog::Medium"
+
   attr_reader :file_remote_url
 
   belongs_to :post, class_name: 'Spree::Blog::Post', foreign_key: 'post_id'

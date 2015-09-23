@@ -1,4 +1,9 @@
 <div data-hook="admin_blog_post_medium_form_fields">
+  <%= f.field_container :group_id, :class => ['form-group'] do %>
+    <%= f.label :group_id, 'Group With' %>
+    <%= f.collection_select(:group_id, @post.media, :id, :name, {include_blank: true}, { :class => 'select2' }) %>
+  <% end %>
+
   <%= f.field_container :name, :class => ['form-group'] do %>
     <%= f.label :name, 'Name *' %>
     <%= f.text_field :name, :class => 'form-control' %>
