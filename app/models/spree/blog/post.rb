@@ -4,6 +4,8 @@ class Spree::Blog::Post < ActiveRecord::Base
 
   validates :title, :short_content, :content, presence: true
 
+  attr_reader :featured_image_remote_url
+  attr_reader :side_content_image_remote_url
   has_attached_file :featured_image,
                     styles: { thumb: '1200x800>' },
                     default_style: :thumb,
@@ -27,4 +29,14 @@ class Spree::Blog::Post < ActiveRecord::Base
   scope :enabled, -> { where(:enabled => true) }
   scope :disabled, -> { where(:enabled => false) }
   scope :recent, -> { limit(10)}
+
+  def featured_image_remote_url=(url_value)
+    self.featured_image = URI.parse(url_value)
+    @featured_image_remote_url = url_value
+  end
+
+  def side_content_image_remote_url=(url_value)
+    self.side_content_image = URI.parse(url_value)
+    @side_content_image_remote_url = url_value
+  end
 end

@@ -16,7 +16,7 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
     @post = Spree::Blog::Post.new post_params
 
     if @post.save
-      redirect_to admin_blog_posts_path, notice: 'Post created successfully.'
+      redirect_to edit_admin_blog_post_path(@post), notice: 'Post created successfully.'
     else
       render :new
     end
@@ -56,6 +56,7 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
     params.require(:post).permit(
         :title,
         :featured_image,
+        :featured_image_remote_url,
         :short_content,
         :content,
         :enabled

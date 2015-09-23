@@ -1,4 +1,5 @@
 class Spree::Blog::Medium < ActiveRecord::Base
+  attr_reader :file_remote_url
 
   belongs_to :post, class_name: 'Spree::Blog::Post', foreign_key: 'post_id'
 
@@ -15,5 +16,8 @@ class Spree::Blog::Medium < ActiveRecord::Base
   validates_attachment :file,
                        :content_type => { :content_type => %w(image/jpeg image/jpg image/png image/gif) }
 
-
+  def file_remote_url=(url_value)
+    self.file = URI.parse(url_value)
+    @file_remote_url = url_value
+  end
 end

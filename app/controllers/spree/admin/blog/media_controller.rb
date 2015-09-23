@@ -73,7 +73,8 @@ class Spree::Admin::Blog::MediaController < Spree::Admin::BaseController
     params.require(:medium).permit(
         :name,
         :url,
-        :file
+        :file,
+        :file_remote_url
     )
   end
 

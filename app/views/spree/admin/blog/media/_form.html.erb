@@ -11,7 +11,11 @@
 
   <%= f.field_container :file, :class => ['form-group'] do %>
     <%= f.label :file, 'Media File' %>
-    <%= f.file_field :file, :class => 'form-control' %>
+    <div class="row">
+      <div class="col-md-6"><%= f.file_field :file, :class => 'form-control' %></div>
+      <div class="col-md-1 text-center"><span style="position: relative; top: 5px;">OR</span></div>
+      <div class="col-md-5"><%= f.text_field :file_remote_url, :class => 'form-control', placeholder: 'Upload from remote URL' %></div>
+    </div>
   <% end %>
   <% if f.object.file.present? %>
     <p><%= image_tag f.object.file.url(:thumb), width: 100 %></p>

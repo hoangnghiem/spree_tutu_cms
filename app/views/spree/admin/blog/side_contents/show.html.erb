@@ -25,7 +25,11 @@
 
       <%= f.field_container :side_content_image, :class => ['form-group'] do %>
         <%= f.label :side_content_image, 'Image' %>
-        <%= f.file_field :side_content_image, :class => 'form-control' %>
+        <div class="row">
+          <div class="col-md-6"><%= f.file_field :side_content_image, :class => 'form-control' %></div>
+          <div class="col-md-1 text-center"><span style="position: relative; top: 5px;">OR</span></div>
+          <div class="col-md-5"><%= f.text_field :side_content_image_remote_url, :class => 'form-control', placeholder: 'Upload from remote URL' %></div>
+        </div>
       <% end %>
       <% if f.object.side_content_image.present? %>
         <p><%= image_tag f.object.side_content_image.url(:thumb), width: 100 %></p>

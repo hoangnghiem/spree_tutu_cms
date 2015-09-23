@@ -22,7 +22,8 @@ class Spree::Admin::Blog::SideContentsController < Spree::Admin::BaseController
     params.require(:post).permit(
         :side_content_title,
         :side_content_link,
-        :side_content_image
+        :side_content_image,
+        :side_content_image_remote_url
     )
   end
 
