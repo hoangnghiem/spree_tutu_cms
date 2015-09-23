@@ -20,7 +20,9 @@ class Spree::Blog::Medium < ActiveRecord::Base
                        :content_type => { :content_type => %w(image/jpeg image/jpg image/png image/gif) }
 
   def file_remote_url=(url_value)
-    self.file = URI.parse(url_value)
-    @file_remote_url = url_value
+    if url_value.present?
+      self.file = URI.parse(url_value)
+      @file_remote_url = url_value
+    end
   end
 end

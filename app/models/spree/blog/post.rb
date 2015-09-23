@@ -31,12 +31,16 @@ class Spree::Blog::Post < ActiveRecord::Base
   scope :recent, -> { limit(10)}
 
   def featured_image_remote_url=(url_value)
-    self.featured_image = URI.parse(url_value)
-    @featured_image_remote_url = url_value
+    if url_value.present?
+      self.featured_image = URI.parse(url_value)
+      @featured_image_remote_url = url_value
+    end
   end
 
   def side_content_image_remote_url=(url_value)
-    self.side_content_image = URI.parse(url_value)
-    @side_content_image_remote_url = url_value
+    if url_value.present?
+      self.side_content_image = URI.parse(url_value)
+      @side_content_image_remote_url = url_value
+    end
   end
 end
