@@ -20,6 +20,7 @@ class Spree::Lookbook < ActiveRecord::Base
 
   scope :enabled, -> { where(:enabled => true) }
   scope :disabled, -> { where(:enabled => false)}
+  scope :recent, -> { enabled.order('created_at DESC').limit(5)}
 
   def featured_image_remote_url=(url_value)
     if url_value.present?

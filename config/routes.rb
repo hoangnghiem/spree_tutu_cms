@@ -42,6 +42,8 @@ Spree::Core::Engine.routes.draw do
     get '*page_path', :to => 'cms/pages#show', :as => :page
   end
 
+  resources :lookbooks, as: 'collections', path: 'collections', only: [:index, :show]
+
   get 'blog/:post_id', to: 'blog/posts#show', as: :blog_post
   get 'blog', to: 'blog/posts#index', as: :blog
   get 'press', to: 'presses#show', as: :press

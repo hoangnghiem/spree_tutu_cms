@@ -1,0 +1,9 @@
+<div class="lookbooks">
+  <% @lookbooks.each do |lookbook| %>
+    <div class="lookbook">
+      <div class="name"><%= link_to lookbook.name, collection_path(lookbook) %></div>
+      <div class="publish-date"><%= lookbook.publish_date %></div>
+      <div class="img"><%= image_tag lookbook.featured_image.url(:thumb) %></div>
+    </div>
+  <% end %>
+</div>

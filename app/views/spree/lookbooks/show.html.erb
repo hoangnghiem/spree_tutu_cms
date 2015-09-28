@@ -1,0 +1,9 @@
+<div id="lookbook">
+  <h1><%= @lookbook.name %></h1>
+  <h6><%= @lookbook.publish_date %></h6>
+  <div class="items">
+    <% @lookbook.items.each do |item| %>
+      <div class="item"><%= image_tag item.image.url(:thumb) %></div>
+    <% end %>
+  </div>
+</div>
