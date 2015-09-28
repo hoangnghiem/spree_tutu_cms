@@ -12,9 +12,14 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :poster, 'Poster' %>
-
-    <%= f.file_field :poster %>
+    <%= f.field_container :poster, :class => ['form-group'] do %>
+      <%= f.label :poster %>
+      <div class="row">
+        <div class="col-md-6"><%= f.file_field :poster, :class => 'form-control' %></div>
+        <div class="col-md-1 text-center"><span style="position: relative; top: 5px;">OR</span></div>
+        <div class="col-md-5"><%= f.text_field :poster_remote_url, :class => 'form-control', placeholder: 'Upload from remote URL' %></div>
+      </div>
+    <% end %>
     <% if @press.poster.present? %>
       <p style="margin-top: 10px;"><%= image_tag(@press.poster.url(:thumb), width: 50) %></p>
     <% end %>

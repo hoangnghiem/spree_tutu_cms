@@ -1,5 +1,7 @@
 class Spree::Press < ActiveRecord::Base
 
+  attr_reader :poster_remote_url
+
   acts_as_list
 
   validates :title, presence: true
@@ -17,5 +19,12 @@ class Spree::Press < ActiveRecord::Base
 
   scope :enabled, -> { where(:enabled => true) }
   scope :disabled, -> { where(:enabled => false)}
+
+  def poster_remote_url=(url_value)
+    if url_value.present?
+      self.poster = URI.parse(url_value)
+      @poster_remote_url = url_value
+    end
+  end
 
 end

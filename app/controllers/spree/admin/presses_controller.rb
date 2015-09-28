@@ -32,7 +32,11 @@ class Spree::Admin::PressesController < Spree::Admin::BaseController
   def destroy
     @press.destroy
 
-    redirect_to admin_presses_path
+    respond_with(@press) do |format|
+      format.html { redirect_to admin_presses_path, notice: 'Press destroyed successfully.' }
+      format.js   { render :partial => "spree/admin/shared/destroy" }
+    end
+
   end
 
   def update_positions
@@ -66,6 +70,7 @@ class Spree::Admin::PressesController < Spree::Admin::BaseController
     params.require(:press).permit(
         :title,
         :poster,
+        :poster_remote_url,
         :enabled
     )
   end
