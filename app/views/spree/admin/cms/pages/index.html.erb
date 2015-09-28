@@ -4,6 +4,8 @@
   <%= button_link_to 'New Page', new_admin_cms_page_path, class: "btn-success", icon: 'add', id: 'admin_new_cms_page_link' %>
 <% end if can? :create, Spree::TaxCategory %>
 
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @pages } %>
+
 <% if @pages.any? %>
   <table class="table" id='listing_cms_pages' data-hook>
     <thead>

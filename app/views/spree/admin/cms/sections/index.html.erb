@@ -8,6 +8,8 @@
 
 <%= render partial: 'spree/admin/shared/layout_tabs', locals: {current: :sections} %>
 
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @sections } %>
+
 <% if @sections.any? %>
   <table class="table sortable" data-hook="sections_table">
     <thead>

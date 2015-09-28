@@ -4,6 +4,8 @@
   <%= button_link_to 'New Layout', new_admin_cms_layout_path, class: "btn-success", icon: 'add', id: 'admin_new_cms_layout_link' %>
 <% end if can? :create, Spree::TaxCategory %>
 
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @layouts } %>
+
 <% if @layouts.any? %>
   <table class="table" id='listing_cms_layouts' data-hook>
     <thead>
