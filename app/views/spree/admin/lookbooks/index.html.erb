@@ -1,0 +1,47 @@
+<% content_for :page_title do %>Lookbooks<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to 'New Lookbook', new_admin_lookbook_path, class: "btn-success", icon: 'add', id: 'admin_new_lookbook_link' %>
+<% end if can? :create, Spree::TaxCategory %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @lookbooks } %>
+
+<% if @lookbooks.any? %>
+<table class="table sortable" data-hook="lookbook_table">
+    <thead>
+      <tr data-hook="lookbook_header">
+        <th colspan="2">Name</th>
+        <th>Publish Date</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @lookbooks.each do |lookbook|
+      @edit_url = edit_admin_lookbook_path(lookbook)
+      @delete_url = admin_lookbook_path(lookbook)
+    %>
+      <tr id="<%= spree_dom_id lookbook %>" data-hook="lookbook_row">
+        <td><%= image_tag lookbook.featured_image.url(:thumb), width: 100 %></td>
+        <td><%= lookbook.name %></td>
+        <td>
+          <% if lookbook.enabled? %>
+            <span class="label label-success">Enabled</span>
+          <% else %>
+            <span class="label label-danger">Disabled</span>
+          <% end %>
+        </td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(lookbook, url: @edit_url, no_text: true) if can? :edit, lookbook %>
+          <%= link_to_delete(lookbook, url: @delete_url, no_text: true) if can? :delete, lookbook %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Lookbook)) %>,
+    <%= link_to(Spree.t(:add_one), new_admin_lookbook_path) if can? :create, Spree::Lookbook %>!
+  </div>
+<% end %>

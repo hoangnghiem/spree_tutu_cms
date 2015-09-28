@@ -1,0 +1,32 @@
+<div data-hook="admin_cms_page_form_fields">
+  <%= f.field_container :name, :class => ['form-group'] do %>
+    <%= f.label :name, 'Name *' %>
+    <%= f.text_field :name, :class => 'form-control' %>
+  <% end %>
+
+  <%= f.field_container :publish_date, :class => ['form-group'] do %>
+    <%= f.label :publish_date, 'Publish Date *' %>
+    <%= f.text_field :publish_date, :class => 'form-control' %>
+  <% end %>
+
+  <%= f.field_container :enabled, :class => ['checkbox'] do %>
+    <%= f.label :enabled do %>
+      <%= f.check_box :enabled %>
+      Enable
+    <% end %>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.field_container :featured_image, :class => ['form-group'] do %>
+      <%= f.label :featured_image %>
+      <div class="row">
+        <div class="col-md-6"><%= f.file_field :featured_image, :class => 'form-control' %></div>
+        <div class="col-md-1 text-center"><span style="position: relative; top: 5px;">OR</span></div>
+        <div class="col-md-5"><%= f.text_field :featured_image_remote_url, :class => 'form-control', placeholder: 'Upload from remote URL' %></div>
+      </div>
+    <% end %>
+    <% if @lookbook.featured_image.present? %>
+      <p style="margin-top: 10px;"><%= image_tag(@lookbook.featured_image.url(:thumb), width: 50) %></p>
+    <% end %>
+  </div>
+</div>

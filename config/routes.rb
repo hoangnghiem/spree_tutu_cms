@@ -30,6 +30,12 @@ Spree::Core::Engine.routes.draw do
     resources :presses, :except => [ :show ] do
       post :update_positions, on: :collection
     end
+
+    resources :lookbooks, :except => [ :show ] do
+      resources :lookbook_items, except: [:show] do
+        post :update_positions, on: :collection
+      end
+    end
   end
 
   constraints(Spree::PossiblePage) do

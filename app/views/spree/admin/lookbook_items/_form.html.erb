@@ -1,0 +1,32 @@
+<div data-hook="admin_lookbook_item_form_fields">
+  <%= f.field_container :group_id, :class => ['form-group'] do %>
+    <%= f.label :group_id, 'Group With' %>
+    <%= f.collection_select(:group_id, @lookbook.items.root, :id, :image_url, {include_blank: true}, { :id => 'lookbook-items-select' }) %>
+  <% end %>
+
+  <%= f.field_container :image, :class => ['form-group'] do %>
+    <%= f.label :image, 'Image' %>
+    <div class="row">
+      <div class="col-md-6"><%= f.file_field :image, :class => 'form-control' %></div>
+      <div class="col-md-1 text-center"><span style="position: relative; top: 5px;">OR</span></div>
+      <div class="col-md-5"><%= f.text_field :image_remote_url, :class => 'form-control', placeholder: 'Upload from remote URL' %></div>
+    </div>
+  <% end %>
+  <% if f.object.image.present? %>
+    <p><%= image_tag f.object.image.url(:thumb), width: 100 %></p>
+  <% end %>
+</div>
+
+<script>
+  $(function() {
+    $('#lookbook-items-select').select2({
+      allowClear: true,
+      formatResult: function(item) {
+        var $state = $(
+          '<span><img src="' + item.text + '" width="100" /></span>'
+        );
+        return $state;
+      }
+    })
+  });
+</script>
