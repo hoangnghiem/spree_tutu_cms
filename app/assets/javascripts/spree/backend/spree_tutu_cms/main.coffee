@@ -28,6 +28,9 @@ $ ->
         ['view', ['fullscreen', 'codeview']],
         ['help', ['help']]
       ]
+      insertTableMaxSize:
+        col: 20
+        row: 20
       onImageUpload: (files) ->
         $summernote = $(this)
         for file in files
