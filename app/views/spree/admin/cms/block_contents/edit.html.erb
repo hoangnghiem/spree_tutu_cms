@@ -1,0 +1,51 @@
+<% content_for :page_title do %>
+  Edit Content
+<% end %>
+
+<%= render partial: 'spree/admin/shared/block_tabs', locals: {current: :contents} %>
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @content} %>
+
+<%= form_for [:admin, :cms, @block, @content] do |f| %>
+  <fieldset>
+    <div data-hook="admin_cms_block_content_form_fields">
+      <%= f.field_container :code, :class => ['form-group'] do %>
+        <%= f.label :code, 'Code *' %>
+        <p class="form-control-static"><code><%= f.object.code %></code></p>
+      <% end %>
+
+      <%= f.field_container :name, :class => ['form-group'] do %>
+        <%= f.label :name, 'Name' %>
+        <%= f.text_field :name, :class => 'form-control' %>
+      <% end %>
+
+      <%= f.fields_for :asset do |fa| %>
+        <%= fa.fields_for :content do |fc| %>
+          <% if fa.object.asset_type == 'text' %>
+            <%= fa.hidden_field :content_type, value: 'Spree::Cms::AssetText' %>
+            <div class="form-group field">
+              <%= fc.label :content, 'Content' %>
+              <%= fc.text_field :content, :class => 'form-control' %>
+            </div>
+          <% end %>
+
+          <% if fa.object.asset_type == 'image' %>
+            <%= fa.hidden_field :content_type, value:'Spree::Cms::AssetImage' %>
+            <div class="form-group field">
+              <%= fc.label :photo, 'Image' %>
+              <%= fc.file_field :photo %>
+            </div>
+          <% end %>
+
+          <% if fa.object.asset_type == 'richtext' %>
+            <%= fa.hidden_field :content_type, value: 'Spree::Cms::AssetText' %>
+            <div class="form-group field">
+              <%= fc.label :content, 'Content' %>
+              <%= fc.text_area :content, { :cols => 60, :rows => 6, :class => 'form-control', :data => {:provider => 'summernote'} } %>
+            </div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

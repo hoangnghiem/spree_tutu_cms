@@ -1,0 +1,37 @@
+<% content_for :page_title do %>Static Blocks<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to 'New Block', new_admin_cms_block_path, class: "btn-success", icon: 'add', id: 'admin_new_cms_block_link' %>
+<% end if can? :create, Spree::TaxCategory %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @blocks } %>
+
+<% if @blocks.any? %>
+  <table class="table" id='listing_cms_blocks' data-hook>
+    <thead>
+    <tr data-hook="cms_block_header">
+      <th>Name</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @blocks.each do |block|
+      @edit_url = edit_admin_cms_block_path(block)
+      @delete_url = admin_cms_block_path(block)
+    %>
+      <tr id="<%= spree_dom_id block %>" data-hook="block_row">
+        <td><%= link_to block.name, edit_admin_cms_block_path(block) %></td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(block, url: @edit_url, no_text: true) if can? :edit, block %>
+          <%= link_to_delete(block, url: @delete_url, no_text: true) if can? :delete, block %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Cms::Block)) %>,
+    <%= link_to(Spree.t(:add_one), new_admin_cms_block_path) if can? :create, Spree::Cms::Block %>!
+  </div>
+<% end %>

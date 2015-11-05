@@ -1,0 +1,17 @@
+<% content_for :page_title do %>
+  Edit Block
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to_with_icon 'arrow-left', 'Back To Block List', admin_cms_blocks_path, class: 'btn btn-default' %>
+<% end %>
+
+<%= render partial: 'spree/admin/shared/block_tabs', locals: {current: :details} %>
+<%= render :partial => 'spree/admin/shared/error_messages', :locals => { :target => @block } %>
+
+<%= form_for [:admin, :cms, @block] do |f| %>
+  <fieldset>
+    <%= render :partial => 'form', :locals => { :f => f } %>
+    <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

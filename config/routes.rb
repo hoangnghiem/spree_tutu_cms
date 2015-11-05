@@ -16,6 +16,9 @@ Spree::Core::Engine.routes.draw do
         resources :sections, :except => [:show]
         resource :design, :only => [:show, :update]
       end
+      resources :blocks, except: [:show] do
+        resources :block_contents
+      end
     end
 
     namespace :blog do

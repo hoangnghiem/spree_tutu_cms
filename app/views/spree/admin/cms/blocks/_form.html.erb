@@ -1,0 +1,10 @@
+<div data-hook="admin_cms_block_form_fields">
+  <%= f.field_container :name, :class => ['form-group'] do %>
+    <%= f.label :name, 'Name *' %>
+    <%= f.text_field :name, :class => 'form-control' %>
+  <% end %>
+  <%= f.field_container :template, :class => ['form-group'] do %>
+    <%= f.label :name, 'Template *' %>
+    <%= f.text_area :template, { :cols => 60, :rows => 6, :class => 'form-control'} %>
+  <% end %>
+</div>

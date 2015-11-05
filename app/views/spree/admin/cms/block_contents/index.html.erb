@@ -1,0 +1,49 @@
+<% content_for :page_title do %>
+  Edit Block
+<% end %>
+
+<%= render partial: 'spree/admin/shared/block_tabs', locals: {current: :contents} %>
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @contents } %>
+
+<% if @contents.any? %>
+  <table class="table sortable" data-hook="contents_table">
+    <thead>
+      <tr data-hook="cms_block_content_header">
+        <th>Code</th>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Value</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @contents.each do |content|
+      @edit_url = edit_admin_cms_block_block_content_path(@block, content)
+    %>
+      <tr id="<%= spree_dom_id content %>" data-hook="content-row">
+        <td><%= link_to content.code, @edit_url %></td>
+        <td><%= content.asset.asset_type %></td>
+        <td><%= content.name %></td>
+        <td>
+          <% if content.asset_text? %>
+            <%= truncate(content.asset.content.content) %>
+          <% end %>
+          <% if content.asset_richtext? %>
+            <%= truncate(content.asset.content.content) %>
+          <% end %>
+          <% if content.asset_image? %>
+            <%= image_tag content.asset.content.photo.url(:thumb) %>
+          <% end %>
+        </td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(content, url: @edit_url, no_text: true) if can? :edit, content %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Cms::BlockContent)) %>,
+  </div>
+<% end %>
