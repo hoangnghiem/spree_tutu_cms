@@ -25,14 +25,16 @@
         <td><%= content.asset.asset_type %></td>
         <td><%= content.name %></td>
         <td>
-          <% if content.asset_text? %>
-            <%= truncate(content.asset.content.content) %>
-          <% end %>
-          <% if content.asset_richtext? %>
-            <%= truncate(content.asset.content.content) %>
-          <% end %>
-          <% if content.asset_image? %>
-            <%= image_tag content.asset.content.photo.url(:thumb) %>
+          <% if content.asset && content.asset.content %>
+            <% if content.asset_text? %>
+              <%= truncate(content.asset.content.content) %>
+            <% end %>
+            <% if content.asset_richtext? %>
+              <%= truncate(content.asset.content.content) %>
+            <% end %>
+            <% if content.asset_image? %>
+              <%= image_tag content.asset.content.photo.url(:thumb) %>
+            <% end %>
           <% end %>
         </td>
         <td class="actions actions-2 text-right">
