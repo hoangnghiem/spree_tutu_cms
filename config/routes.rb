@@ -1,6 +1,6 @@
 class Spree::PossiblePage
   def self.matches?(request)
-    return false if request.path =~ /(^\/+(admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|user)+)/
+    return false if request.path =~ /(^\/+(admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|latest|user)+)/
     !Spree::Cms::Page.enabled.find_by_url(request.path[1..-1]).nil?
   end
 end
@@ -52,4 +52,5 @@ Spree::Core::Engine.routes.draw do
   get 'blog/:post_id', to: 'blog/posts#show', as: :blog_post
   get 'blog', to: 'blog/posts#index', as: :blog
   get 'press', to: 'presses#show', as: :press
+  get 'latest', to: 'latest#show', as: :latest
 end
