@@ -1,0 +1,11 @@
+<tr id="<%= dom_id(product) %>">
+  <td class="sku"><%= product.sku rescue '' %></td>
+  <td class="image"><%= mini_image product %></td>
+  <td><%= link_to product.try(:name), edit_admin_product_path(product) %></td>
+  <td class="text-center"><%= product.display_price.to_html rescue '' %></td>
+  <td class="actions actions-3 text-right">
+    <%= link_to admin_latest_products_path(product_id: product.id), class: 'btn btn-danger btn-sm delete-resource icon-link with-tip action-delete no-text', remote: true, method: :delete, data: {'original-title' => 'Remove from Latest', 'confirm' => 'Are you sure?'} do %>
+      <span class="icon icon-delete"></span>
+    <% end %>
+  </td>
+</tr>

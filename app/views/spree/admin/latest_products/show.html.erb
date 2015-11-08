@@ -1,0 +1,33 @@
+<% content_for :page_title do %>Latest Products<% end %>
+
+<%= form_tag '', method: :put, remote: true do %>
+  <div class="input-group">
+    <%= hidden_field_tag "product_id", '', :id => "product_searcher" %>
+    <div class="input-group-btn">
+      <%= submit_tag 'Add Product', class: 'btn btn-success' %>
+    </div>
+  </div>
+  <p class="help-block">Enter product name and click 'Add Product' button to add product to Latest list.</p>
+<% end %>
+
+<table class="table" id="latest_products">
+  <thead>
+    <tr>
+      <th><%= Spree.t(:sku) %></th>
+      <th colspan="2"><%= Spree.t(:name) %></th>
+      <th class="text-center"><%= Spree.t(:master_price) %></th>
+      <th class="actions"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @latest_products.each do |product| %>
+      <%= render 'product', product: product %>
+    <% end %>
+  </tbody>
+</table>
+
+<script>
+  $(document).ready(function () {
+    $('#product_searcher').productAutocomplete({multiple: false});
+  });
+</script>

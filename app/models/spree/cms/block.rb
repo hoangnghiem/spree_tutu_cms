@@ -22,6 +22,10 @@ class Spree::Cms::Block < ActiveRecord::Base
     ::Liquid::Template.parse(template).render(args)
   end
 
+  def self.render(name)
+    find_by_name!(name).render
+  end
+
   private
 
   def generate_block_content

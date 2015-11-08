@@ -39,6 +39,8 @@ Spree::Core::Engine.routes.draw do
         post :update_positions, on: :collection
       end
     end
+
+    resource :latest_products, only: [:show, :update, :destroy]
   end
 
   constraints(Spree::PossiblePage) do

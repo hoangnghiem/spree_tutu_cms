@@ -1,0 +1,4 @@
+$('#product_searcher').select2('val', '');
+<% unless @existed %>
+  $('#latest_products tbody').prepend("<%= j render('product', product: @product) %>");
+<% end %>
