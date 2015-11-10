@@ -7,14 +7,12 @@ class Spree::Admin::LatestProductsController < Spree::Admin::BaseController
   def update
     @product = Spree::Product.find(params[:product_id])
     @existed = @product.latest
-    @product.latest = true
-    @product.save
+    @product.update_column(:latest, true)
   end
 
   def destroy
     @product = Spree::Product.find(params[:product_id])
-    @product.latest = false
-    @product.save
+    @product.update_column(:latest, false)
   end
 
 end
