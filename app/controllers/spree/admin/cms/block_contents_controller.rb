@@ -24,13 +24,15 @@ class Spree::Admin::Cms::BlockContentsController < Spree::Admin::BaseController
   end
 
   def edit
-    case @content.asset.asset_type
-    when 'image'
-      @content.asset.content = Spree::Cms::AssetImage.new
-    when 'text'
-      @content.asset.content = Spree::Cms::AssetText.new
-    when 'richtext'
-      @content.asset.content = Spree::Cms::AssetRichtext.new
+    unless @content.asset.content
+      case @content.asset.asset_type
+      when 'image'
+        @content.asset.content = Spree::Cms::AssetImage.new
+      when 'text'
+        @content.asset.content = Spree::Cms::AssetText.new
+      when 'richtext'
+        @content.asset.content = Spree::Cms::AssetRichtext.new
+      end
     end
   end
 
