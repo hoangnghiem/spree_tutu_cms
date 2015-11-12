@@ -3,7 +3,7 @@ class Spree::Cms::BlockContent < ActiveRecord::Base
   has_one :asset, class_name: 'Spree::Cms::Asset', dependent: :destroy
   accepts_nested_attributes_for :asset
 
-  validates :code, presence: true, uniqueness: {scope: :block}
+  validates :code, presence: true, uniqueness: {scope: :block_id}
 
   ASSET_TYPES = %w{ image text richtext }
 
