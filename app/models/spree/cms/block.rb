@@ -32,7 +32,7 @@ class Spree::Cms::Block < ActiveRecord::Base
     puts 'generate_block_content'
     begin
       # extract variable {{ }}
-      content_variables = template.scan(/\{\{(.*?)\}\}/).flatten.map(&:strip)
+      content_variables = template.scan(/\{\{(.*?)\}\}/).flatten.map(&:strip).uniq
       content_codes = content_variables.map {|var| var.split('__').first }
       puts "content_codes = #{content_codes}"
       contents.each do |content|
