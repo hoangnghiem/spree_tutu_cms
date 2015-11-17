@@ -59,7 +59,8 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
         :featured_image_remote_url,
         :short_content,
         :content,
-        :enabled
+        :enabled,
+        :publish_date
     )
   end
 

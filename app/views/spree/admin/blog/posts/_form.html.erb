@@ -4,6 +4,16 @@
     <%= f.text_field :title, :class => 'form-control' %>
   <% end %>
 
+  <%= f.field_container :publish_date, :class => ['form-group'] do %>
+    <%= f.label :publish_date, 'Publish Date' %>
+    <div class="input-group">
+      <%= f.text_field :publish_date, :class => 'datepicker datepicker-from form-control', :placeholder => Spree.t(:start) %>
+      <span class="input-group-addon">
+        <i class="icon icon-calendar"></i>
+      </span>
+    </div>
+  <% end %>
+
   <%= f.field_container :enabled, :class => ['checkbox'] do %>
     <%= f.label :enabled do %>
       <%= f.check_box :enabled %>
