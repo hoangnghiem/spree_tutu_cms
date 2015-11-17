@@ -45,7 +45,7 @@ class Spree::Admin::Blog::PostsController < Spree::Admin::BaseController
 
   def load_posts
     per_page = params[:per_page] || 20
-    @posts = Spree::Blog::Post.order('created_at DESC').page(params[:page]).per(per_page)
+    @posts = Spree::Blog::Post.order('publish_date DESC').page(params[:page]).per(per_page)
   end
 
   def find_post

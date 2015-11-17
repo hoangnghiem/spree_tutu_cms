@@ -10,6 +10,7 @@
     <tr data-hook="blog_post_header">
       <th>Title</th>
       <th>URL</th>
+      <th>Publish Date</th>
       <th>Status</th>
       <th></th>
     </tr>
@@ -22,6 +23,7 @@
       <tr id="<%= spree_dom_id post %>" data-hook="tax_row">
         <td><%= post.title %></td>
         <td><%= blog_post_url(post) %></td>
+        <td><%= post.publish_date.try(:strftime, '%d %b %Y') %></td>
         <td>
           <% if post.enabled? %>
             <span class="label label-success">Enabled</span>

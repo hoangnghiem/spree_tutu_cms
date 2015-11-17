@@ -28,7 +28,7 @@ class Spree::Blog::Post < ActiveRecord::Base
 
   scope :enabled, -> { where(:enabled => true) }
   scope :disabled, -> { where(:enabled => false) }
-  scope :recent, -> { enabled.limit(10).order('created_at DESC') }
+  scope :recent, -> { enabled.limit(10).order('publish_date DESC') }
 
   def featured_image_remote_url=(url_value)
     if url_value.present?
