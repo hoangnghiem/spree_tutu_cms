@@ -71,12 +71,7 @@ class Spree::Admin::Cms::BlockContentsController < Spree::Admin::BaseController
   end
 
   def content_params
-    params.require(:block_content).permit(
-      :id,
-      :code,
-      :name,
-      :asset_attributes => [:id, :content_type, :content_attributes => [:id, :content, :photo]]
-    )
+    params.require(:block_content).permit!
   end
 
 end
