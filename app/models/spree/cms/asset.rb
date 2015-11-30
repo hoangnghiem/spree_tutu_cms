@@ -5,12 +5,10 @@ class Spree::Cms::Asset < ActiveRecord::Base
 
   def attributes=(attributes = {})
     self.content_type = attributes[:content_type]
-    puts attributes
     super
   end
 
   def content_attributes=(attributes)
-    puts attributes
     if attributes["id"]
       c = content_type.constantize.find(attributes.delete("id"))
       c.assign_attributes(attributes)

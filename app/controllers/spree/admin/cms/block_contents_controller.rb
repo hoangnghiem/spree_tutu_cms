@@ -59,7 +59,7 @@ class Spree::Admin::Cms::BlockContentsController < Spree::Admin::BaseController
 
   def load_contents
     per_page = params[:per_page] || 20
-    @contents = @block.contents.page(params[:page]).per(per_page)
+    @contents = @block.contents.order('code').page(params[:page]).per(per_page)
   end
 
   def find_block

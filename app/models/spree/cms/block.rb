@@ -34,16 +34,19 @@ class Spree::Cms::Block < ActiveRecord::Base
       # extract variable {{ }}
       content_variables = template.scan(/\{\{(.*?)\}\}/).flatten.map(&:strip).uniq
       content_codes = content_variables.map {|var| var.split('__').first }
-      puts "content_codes = #{content_codes}"
+
       contents.each do |content|
         # clean up old contents
         unless content_codes.include?(content.code)
+          puts "destroy content"
           content.destroy
         else
-          puts "content: #{content.code}"
           content_codes.delete(content.code)
+          content_variables.delete(content.code + "__" + content.asset.asset_type)
         end
       end
+      puts "new content_codes = #{content_codes}"
+      puts "new content_variables = #{content_variables}"
       if content_codes.any?
         content_variables.each do |var|
           code, asset_type = var.split('__')
