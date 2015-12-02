@@ -2,6 +2,8 @@ require 'liquid'
 
 class Spree::Cms::Page < ActiveRecord::Base
 
+  acts_as_list
+
   belongs_to :layout, class_name: 'Spree::Cms::Layout', foreign_key: :layout_id
   has_many :page_contents, class_name: 'Spree::Cms::PageContent', dependent: :destroy
 
@@ -10,6 +12,8 @@ class Spree::Cms::Page < ActiveRecord::Base
 
   scope :enabled, -> { where(:enabled => true) }
   scope :disabled, -> { where(:enabled => false)}
+
+  scope :footer_link, -> { where(:footer_link => true) }
 
   def render
     args = {}

@@ -38,6 +38,18 @@ class Spree::Admin::Cms::PagesController < Spree::Admin::BaseController
     end
   end
 
+  def update_positions
+    ActiveRecord::Base.transaction do
+      params[:positions].each do |id, index|
+        Spree::Cms::Page.find(id).set_list_position(index)
+      end
+    end
+
+    respond_to do |format|
+      format.js { render text: 'Ok' }
+    end
+  end
+
   private
 
   def collection_url
@@ -46,7 +58,7 @@ class Spree::Admin::Cms::PagesController < Spree::Admin::BaseController
 
   def load_pages
     per_page = params[:per_page] || 20
-    @pages = Spree::Cms::Page.page(params[:page]).per(per_page)
+    @pages = Spree::Cms::Page.order('position').page(params[:page]).per(per_page)
   end
 
   def find_page
@@ -58,6 +70,7 @@ class Spree::Admin::Cms::PagesController < Spree::Admin::BaseController
         :title,
         :url,
         :enabled,
+        :footer_link,
         :content,
         :meta_keywords,
         :meta_description,

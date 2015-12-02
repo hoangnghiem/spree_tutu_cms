@@ -7,12 +7,13 @@
 <%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @pages } %>
 
 <% if @pages.any? %>
-  <table class="table" id='listing_cms_pages' data-hook>
+  <table class="table sortable" id='listing_cms_pages' data-sortable-link="<%= update_positions_admin_cms_pages_url %>" data-hook>
     <thead>
     <tr data-hook="cms_page_header">
-      <th>Title</th>
+      <th colspan="2">Title</th>
       <th>URL</th>
       <th>Status</th>
+      <th>Footer Link</th>
       <th></th>
     </tr>
     </thead>
@@ -22,6 +23,9 @@
       @delete_url = admin_cms_page_path(page)
     %>
       <tr id="<%= spree_dom_id page %>" data-hook="tax_row">
+        <td class="move-handle text-center">
+          <span class="icon icon-move handle"></span>
+        </td>
         <td><%= page.title%></td>
         <td><%= page_url(page.url) %></td>
         <td>
@@ -29,6 +33,13 @@
             <span class="label label-success">Enabled</span>
           <% else %>
             <span class="label label-danger">Disabled</span>
+          <% end %>
+        </td>
+        <td>
+          <% if page.footer_link? %>
+            <span class="label label-success">Yes</span>
+          <% else %>
+            <span class="label label-danger">No</span>
           <% end %>
         </td>
         <td class="actions actions-2 text-right">
