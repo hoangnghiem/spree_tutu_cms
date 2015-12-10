@@ -29,7 +29,7 @@
             <span class="icon icon-move handle"></span>
           <% end %>
         </td>
-        <td><%= image_tag medium.file.url(:thumb), width: 100 %></td>
+        <td><%= image_tag(medium.file.url, width: 100) if medium.file.present? %></td>
         <td><%= medium.name %></td>
         <td><%= medium.url %></td>
         <td class="actions actions-2 text-right">
