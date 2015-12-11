@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'spree_core', '~> 3.0.4'
 
-  s.add_dependency 'summernote-rails'
+  s.add_dependency 'summernote-rails', '0.6.16.0'
   s.add_dependency 'font-awesome-rails'
   s.add_dependency 'bootstrap-sass'
   s.add_dependency 'liquid'
