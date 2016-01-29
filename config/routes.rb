@@ -1,6 +1,6 @@
 class Spree::PossiblePage
   def self.matches?(request)
-    return false if request.path =~ /(^\/+(admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|latest|contact|user)+)/
+    return false if request.path =~ /(^\/+(admin|account|cart|checkout|content|login|pg\/|orders|products|s\/|session|signup|shipments|states|t\/|tax_categories|latest|user)+)/
     !Spree::Cms::Page.enabled.find_by_url(request.path[1..-1]).nil?
   end
 end
