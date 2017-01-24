@@ -2,7 +2,7 @@ class Spree::Lookbook < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
 
-  has_many :items, class_name: 'Spree::LookbookItem', order: 'position', foreign_key: 'lookbook_id', dependent: :destroy
+  has_many :items, -> { order('position') }, class_name: 'Spree::LookbookItem', foreign_key: 'lookbook_id', dependent: :destroy
 
   attr_reader :featured_image_remote_url
 
