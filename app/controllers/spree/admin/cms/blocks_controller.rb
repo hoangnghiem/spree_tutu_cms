@@ -56,7 +56,7 @@ class Spree::Admin::Cms::BlocksController < Spree::Admin::BaseController
 
   def block_params
     params.require(:block).permit(
-      :name, :template
+      :name, :template, :note
     )
   end
 

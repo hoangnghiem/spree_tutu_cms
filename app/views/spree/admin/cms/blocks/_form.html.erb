@@ -7,4 +7,8 @@
     <%= f.label :name, 'Template *' %>
     <%= f.text_area :template, { :cols => 60, :rows => 6, :class => 'form-control'} %>
   <% end %>
+  <%= f.field_container :note, :class => ['form-group'] do %>
+    <%= f.label :note, 'Note' %>
+    <%= f.text_area :note, { :cols => 60, :rows => 6, :class => 'form-control'} %>
+  <% end %>
 </div>

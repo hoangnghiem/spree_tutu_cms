@@ -11,6 +11,7 @@
     <thead>
     <tr data-hook="cms_block_header">
       <th>Name</th>
+      <th>Note</th>
       <th></th>
     </tr>
     </thead>
@@ -21,6 +22,7 @@
     %>
       <tr id="<%= spree_dom_id block %>" data-hook="block_row">
         <td><%= link_to block.name, edit_admin_cms_block_path(block) %></td>
+        <td><%= simple_format block.note %></td>
         <td class="actions actions-2 text-right">
           <%= link_to_edit(block, url: @edit_url, no_text: true) if can? :edit, block %>
           <%= link_to_delete(block, url: @delete_url, no_text: true) if can? :delete, block %>
