@@ -1,6 +1,6 @@
 class Spree::Cms::Asset < ActiveRecord::Base
-  belongs_to :block_content, class_name: 'Spree::Cms::BlockContent'
-  belongs_to :content, polymorphic: true
+  belongs_to :block_content, class_name: 'Spree::Cms::BlockContent', touch: true
+  belongs_to :content, polymorphic: true, touch: true
   accepts_nested_attributes_for :content
 
   def attributes=(attributes = {})
