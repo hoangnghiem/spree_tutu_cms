@@ -8,7 +8,7 @@ class Spree::Cms::Block < ActiveRecord::Base
 
   def render
     args = {}
-    contents.each do |block_content|
+    contents.includes(:asset => :content).each do |block_content|
       args["#{block_content.code}__#{block_content.asset.asset_type}"] = case block_content.asset.asset_type
           when 'image'
             block_content.asset.content.photo.url
