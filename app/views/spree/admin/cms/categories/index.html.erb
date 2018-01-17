@@ -1,0 +1,37 @@
+<% content_for :page_title do %>Categories<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to 'New Category', new_admin_cms_category_path, class: "btn-success", icon: 'add', id: 'admin_new_cms_category_link' %>
+<% end if can? :create, Spree::TaxCategory %>
+
+<%= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @categories } %>
+
+<% if @categories.any? %>
+  <table class="table sortable" id='listing_cms_categories' data-hook>
+    <thead>
+    <tr data-hook="cms_category_header">
+      <th>Name</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @categories.each do |category|
+      @edit_url = edit_admin_cms_category_path(category)
+      @delete_url = admin_cms_category_path(category)
+    %>
+      <tr id="<%= spree_dom_id category %>" data-hook="tax_row">
+        <td><%= category.name %></td>
+        <td class="actions actions-2 text-right">
+          <%= link_to_edit(category, url: @edit_url, no_text: true) if can? :edit, category %>
+          <%= link_to_delete(category, url: @delete_url, no_text: true) if can? :delete, category %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Cms::Category)) %>,
+    <%= link_to(Spree.t(:add_one), new_admin_cms_category_path) if can? :create, Spree::Cms::Category %>!
+  </div>
+<% end %>

@@ -74,7 +74,8 @@ class Spree::Admin::Cms::PagesController < Spree::Admin::BaseController
         :content,
         :meta_keywords,
         :meta_description,
-        :layout_id
+        :layout_id,
+        :category_id
     )
   end
 

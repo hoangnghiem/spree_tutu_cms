@@ -12,6 +12,11 @@
         <%= f.collection_select(:layout_id, Spree::Cms::Layout.all, :id, :name, {}, { :class => 'select2' }) %>
       <% end %>
 
+      <%= f.field_container :category_id, :class => ['form-group'] do %>
+        <%= f.label :category_id, 'Category' %> <span class="required">*</span>
+        <%= f.collection_select(:category_id, Spree::Cms::Category.all, :id, :name, {}, { :class => 'select2' }) %>
+      <% end %>
+
       <%= f.field_container :title, :class => ['form-group'] do %>
         <%= f.label :title, 'Title *' %>
         <%= f.text_field :title, :class => 'form-control' %>

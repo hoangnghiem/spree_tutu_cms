@@ -5,6 +5,7 @@ class Spree::Cms::Page < ActiveRecord::Base
   acts_as_list
 
   belongs_to :layout, class_name: 'Spree::Cms::Layout', foreign_key: :layout_id
+  belongs_to :category, class_name: 'Spree::Cms::Category', foreign_key: :category_id
   has_many :page_contents, class_name: 'Spree::Cms::PageContent', dependent: :destroy
 
   validates :title, :layout_id, presence: true

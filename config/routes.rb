@@ -20,6 +20,7 @@ Spree::Core::Engine.routes.draw do
       resources :blocks, except: [:show] do
         resources :block_contents
       end
+      resources :categories, except: [:show]
     end
 
     namespace :blog do
